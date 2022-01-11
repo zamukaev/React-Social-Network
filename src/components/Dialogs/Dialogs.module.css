@@ -1,0 +1,11 @@
+.gialogs {
+	display: grid;
+	grid-template-columns: 2fr 10fr;
+}
+.dialogItems a {
+	padding: 10px;
+	color: white;
+}
+
+.item {
+}
