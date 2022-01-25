@@ -1,4 +1,17 @@
-.messages {
-	padding: 10px;
-	color: white;
+.column {
+}
+.item {
+	display: grid;
+	grid-template-columns: 1fr 10fr;
+	grid-template-rows: 1fr;
+	/* display: flex;
+	align-items: center; */
+}
+.item2 {
+	display: grid;
+	grid-template-columns: 1fr 10fr;
+	grid-template-rows: 1fr;
+
+	/* display: flex;
+	align-items: center; */
 }

@@ -2,20 +2,28 @@ import React from 'react';
 import styles from './MyPosts.module.css'
 import Post from './Post/Post';
 
+const MyPosts = ({ posts, addPostHandler, updatePostHandler, newPostText }) => {
 
-const MyPosts = ({ postsItem }) => {
+	const buttonHandler = (event) => {
+		event.preventDefault();
+		addPostHandler();
+	};
+	const onChangeHandler = (event) => {
+		let value = event.target.value
+		updatePostHandler(value);
+	}
 	return (
 		<div className={styles.postsBlock}>
 			<h3>My posts</h3>
-			<div>
-				<div>	<textarea></textarea></div>
-				<div><button>Add post</button></div>
-			</div>
+			<form onSubmit={buttonHandler} >
+				<textarea onChange={onChangeHandler} value={newPostText} ></textarea>
+				<div>	<input type="submit" value="add post" /></div>
+			</form  >
 			<div className={styles.posts}>
-				{postsItem.map(item => <Post post={item.post} likesCount={item.likesCount} />)}
+				{posts.map((item, index) => <Post key={index.toString()} post={item.post} likesCount={item.likesCount} />)}
 			</div>
 
-		</div>
+		</div >
 	)
 }
 

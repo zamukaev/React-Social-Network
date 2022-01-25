@@ -1,5 +1,9 @@
 .dialog {
-	color: white;
+	color: #1877f2;
+	margin-bottom: 10px;
+}
+.dialog:last-child {
+	margin-bottom: 0px;
 }
 a.active {
 	color: gold;

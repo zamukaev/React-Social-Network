@@ -1,11 +1,18 @@
 .gialogs {
 	display: grid;
+
 	grid-template-columns: 2fr 10fr;
 }
 .dialogItems a {
 	padding: 10px;
-	color: white;
+	color: #1877f2;
+}
+.messages {
+	display: grid;
+	grid-template-columns: 1fr;
 }
 
 .item {
+}
+.textarea {
 }
