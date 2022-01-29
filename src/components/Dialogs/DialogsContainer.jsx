@@ -19,7 +19,6 @@ const mapDispatchToProps = (dispatch) => {
 		updateMessageHandler: (value) => {
 			let action = updateNewMessageTextCreator(value);
 			dispatch(action);
-
 		}
 	}
 }
