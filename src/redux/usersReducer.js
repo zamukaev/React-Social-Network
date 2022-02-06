@@ -1,9 +1,12 @@
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_PAGES = 'SET_PAGES';
+const SET_TOTALCOUNT = 'SET_TOTALCOUNT';
 const initialState = {
-	users: [
-
-	]
+	users: [],
+	pages: 1,
+	count: 5,
+	totalCount: 0
 }
 const usersReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -18,7 +21,17 @@ const usersReducer = (state = initialState, action) => {
 		case SET_USERS:
 			return {
 				...state,
-				users: [...state.users, ...action.users]
+				users: [...action.users]
+			}
+		case SET_PAGES:
+			return {
+				...state,
+				pages: action.pageNumber
+			}
+		case SET_TOTALCOUNT:
+			return {
+				...state,
+				totalCount: action.totalCount
 			}
 		default: return state;
 	}
@@ -26,4 +39,6 @@ const usersReducer = (state = initialState, action) => {
 }
 export const toggleFollowAC = (userId) => ({ type: TOGGLE_FOLLOW, userId });
 export const setUsers = (users) => ({ type: SET_USERS, users })
+export const setPagesAC = (pageNumber) => ({ type: SET_PAGES, pageNumber })
+export const setTotalCountAC = (totalCount) => ({ type: SET_TOTALCOUNT, totalCount })
 export default usersReducer;
