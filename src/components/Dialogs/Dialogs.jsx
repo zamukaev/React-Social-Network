@@ -1,19 +1,19 @@
 import React from "react";
 import styles from './Dialogs.module.css';
+
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import Message2 from "./Message/Message2";
 
 
-const Dialogs = ({ state, addMessageHandler, updateMessageHandler }) => {
+const Dialogs = ({ state, sendMessageCreator, updateNewMessageTextCreator }) => {
 	const buttonHandler = (event) => {
 		event.preventDefault();
-		addMessageHandler();
+		sendMessageCreator();
 	};
 
 	const changeHandler = (event) => {
 		let value = event.target.value;
-		updateMessageHandler(value);
+		updateNewMessageTextCreator(value);
 	};
 
 	let dialogsElement = state.dialogsItem.map((item, index) => (

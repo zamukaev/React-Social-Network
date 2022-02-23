@@ -1,54 +1,58 @@
 import React from "react";
 import styles from './Users.module.css';
-import * as axios from 'axios';
 import userImage from '../../image/01.png';
-class Users extends React.Component {
-	componentDidMount() {
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.pages}&count=${this.props.count}`)
-			.then(response => {
-				this.props.setUsers(response.data.items);
-				this.props.setTotalCount(response.data.totalCount)
-			});
+import { usersAPI } from "../../api/api";
 
-	}
-	onClickHandler = (pageNumber) => {
-		this.props.setPages(pageNumber)
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.count}`)
-			.then(response => {
-				this.props.setUsers(response.data.items);
-			});
+import { NavLink } from "react-router-dom";
+
+const Users = (props) => {
+	let pageCount = Math.ceil(props.totalCount / props.count);
+	let page = [];
+	for (let i = 1; i < 30; i++) {
+		page.push(i);
 	}
 
-	render() {
+	const btnFollowHandler = (id) => {
+		props.follow(id)
 
-		let pageCount = Math.ceil(this.props.totalCount / this.props.count);
-		let pages = [];
-		for (let i = 1; i < pageCount; i++) {
-			pages.push(i)
-		}
-		return (
-			<div>
+	}
+
+	const btnUnFollowHandler = (id) => {
+		props.unFollow(id)
+	}
+
+	return (
+		props.isFetching ?
+			<div><img src="https://cdn.icon-icons.com/icons2/2098/PNG/512/loader_icon_128824.png" alt="" /></div>
+			:
+			<div >
+
 				<div>
-					{pages.map(p => {
-						return <span key={p} onClick={() => this.onClickHandler(p)} className={this.props.pages === p ? styles.selectPages : null}>{p}</span>
+					{page.map(p => {
+						return <span key={p} onClick={() => props.onClickHandler(p)} className={props.pages === p ? styles.selectPages : null}>{p}</span>
 					})}
 				</div>
 				{
-					this.props.users.map((item) => (
+					props.users.map((item) => (
 						<div key={item.id}>
-							<img className={styles.usersImage} src={item.photos.small !== null ? item.photos.small : userImage} alt="" />
-							<h3>{item.name}</h3>
+							<NavLink to={`/profile/${item.id}`} >
+								<img className={styles.usersImage} src={item.photos.small !== null ? item.photos.small : userImage} alt="" />
+								<h3>{item.name}</h3>
+							</NavLink>
 							<p>{'item.location.city'}</p>
 							<p>{'item.location.country'}</p>
-							<button onClick={() => this.props.toggleFollow(item.id)} >{item.followed ? 'followed' : 'unfollowed'}</button>
+							<div>
+								{
+									item.followed ?
+										<button onClick={() => btnUnFollowHandler(item.id)} disabled={props.followingInProgress.some(id => id === item.id)} >unfollow</button>
+										: <button onClick={() => btnFollowHandler(item.id)} disabled={props.followingInProgress.some(id => id === item.id)}>follow</button>
+								}
+							</div>
 						</div>
 					))
 				}
-
 			</div >
-		);
-	}
-
+	)
 }
 
 export default Users;
