@@ -56,7 +56,6 @@ const initialState = {
 			img: "https://cdn4.iconfinder.com/data/icons/people-avatar-filled-outline/64/glasses_businessman_people_male_man_avatar_blonde-256.png"
 		},
 	],
-	newMessageText: '',
 	dialogsItem: [
 		{
 			id: 1,
@@ -96,12 +95,11 @@ const dialogsReducer = (state = initialState, action) => {
 		case SEND_NEW_MESSAGE:
 			let newMessage = {
 				id: 1,
-				message: state.newMessageText,
+				message: action.newMessageText,
 				img: "https://cdn2.iconfinder.com/data/icons/avatars-60/5985/13-Captain-256.png"
 			};
 			return {
 				...state,
-				newMessageText: '',
 				messages: [...state.messages, newMessage]
 			}
 
@@ -109,9 +107,10 @@ const dialogsReducer = (state = initialState, action) => {
 	}
 
 }
-export const sendMessageCreator = () => {
+export const sendMessageCreator = (newMessageText) => {
 	return {
-		type: SEND_NEW_MESSAGE
+		type: SEND_NEW_MESSAGE,
+		newMessageText
 	}
 };
 export const updateNewMessageTextCreator = (value) => {

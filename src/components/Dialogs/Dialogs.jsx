@@ -3,17 +3,17 @@ import styles from './Dialogs.module.css';
 
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import { reduxForm } from "redux-form";
+import DialogsForm from "./DialogsForm";
+
 
 
 const Dialogs = ({ state, sendMessageCreator, updateNewMessageTextCreator }) => {
-	const buttonHandler = (event) => {
-		event.preventDefault();
-		sendMessageCreator();
-	};
 
-	const changeHandler = (event) => {
-		let value = event.target.value;
-		updateNewMessageTextCreator(value);
+	const AddMessageFormRedux = reduxForm({ form: 'newMessageText' })(DialogsForm);
+
+	const addMessageHandle = (NewMessageData) => {
+		sendMessageCreator(NewMessageData.newMessageText);
 	};
 
 	let dialogsElement = state.dialogsItem.map((item, index) => (
@@ -23,6 +23,7 @@ const Dialogs = ({ state, sendMessageCreator, updateNewMessageTextCreator }) => 
 	let messageElement = state.messages.map((item, index) => (
 		<Message key={index.toString()} message={item.message} img={item.img} id={item.id} />
 	));
+
 	return (
 		<div className={styles.gialogs}>
 			<div className={styles.dialogItems}>
@@ -33,8 +34,7 @@ const Dialogs = ({ state, sendMessageCreator, updateNewMessageTextCreator }) => 
 					{messageElement}
 				</div>
 				<div className={styles.textarea}>
-					<textarea onChange={changeHandler} value={state.newMessageText} placeholder="Enter your message"></textarea>
-					<div><button onClick={buttonHandler}>send</button></div>
+					<AddMessageFormRedux onSubmit={addMessageHandle} />
 				</div >
 			</div>
 		</div>

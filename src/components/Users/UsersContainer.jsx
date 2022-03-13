@@ -2,8 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Users from "./Users";
-import { usersAPI } from "../../api/api";
 import { follow, unFollow, toggleIsFollowingProgress, getUsers } from "../../redux/usersReducer";
+import { compose } from "redux";
+import withAuthRedirect from "../hoc/withAuthRedirect";
 
 class UserComponent extends React.Component {
 
@@ -22,7 +23,7 @@ class UserComponent extends React.Component {
 			onClickHandler={this.onClickHandler}
 			totalCount={this.props.totalCount}
 			count={this.props.count}
-			pages={this.pages}
+			pages={this.props.pages}
 			users={this.props.users}
 			isFetching={this.props.isFetching}
 			followingInProgress={this.props.followingInProgress}
@@ -44,10 +45,8 @@ const mapStateToProps = (state) => {
 		followingInProgress: state.usersPage.followingInProgress
 	}
 };
-export default connect(mapStateToProps, {
-	follow,
-	unFollow,
-	toggleIsFollowingProgress,
-	getUsers
-}
-)(UserComponent);
+
+export default compose(
+	connect(mapStateToProps, { follow, unFollow, toggleIsFollowingProgress, getUsers }),
+	withAuthRedirect
+)(UserComponent)

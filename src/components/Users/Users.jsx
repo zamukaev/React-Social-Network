@@ -1,14 +1,12 @@
 import React from "react";
 import styles from './Users.module.css';
 import userImage from '../../image/01.png';
-import { usersAPI } from "../../api/api";
-
 import { NavLink } from "react-router-dom";
 
 const Users = (props) => {
 	let pageCount = Math.ceil(props.totalCount / props.count);
 	let page = [];
-	for (let i = 1; i < 30; i++) {
+	for (let i = 1; i < pageCount; i++) {
 		page.push(i);
 	}
 
@@ -23,7 +21,7 @@ const Users = (props) => {
 
 	return (
 		props.isFetching ?
-			<div><img src="https://cdn.icon-icons.com/icons2/2098/PNG/512/loader_icon_128824.png" alt="" /></div>
+			<div><img src="https://i.gifer.com/origin/b4/b4d657e7ef262b88eb5f7ac021edda87.gif" alt="" /></div>
 			:
 			<div >
 

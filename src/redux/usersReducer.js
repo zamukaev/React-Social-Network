@@ -79,10 +79,11 @@ export const getUsers = (pages, count) => {
 	return (dispatch) => {
 		dispatch(setToggleIsFetching(true));
 		usersAPI.getUsers(pages, count)
-			.then(data => {
-				dispatch(setUsers(data.items));
-				dispatch(setTotalCountAC(data.totalCount));
+			.then(response => {
+				dispatch(setUsers(response.data.items));
+				dispatch(setTotalCountAC(response.data.totalCount));
 				dispatch(setToggleIsFetching(false));
+				dispatch(setPagesAC(pages))
 			});
 	}
 }

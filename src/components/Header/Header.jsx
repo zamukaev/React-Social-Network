@@ -3,16 +3,11 @@ import styles from './Header.module.css';
 
 import { NavLink } from 'react-router-dom'
 
-const Header = ({ login, isAuth }) => {
-
+const Header = ({ login, isAuth, logout }) => {
 	return <header className={styles.header}>
 		<img src='https://www.freelogodesign.org/Content/img/logo-ex-7.png' />
 
-
-		<NavLink to='/login'>
-			<div className={styles.login}>	{isAuth ? login : 'login'}
-			</div>
-		</NavLink>
+		{isAuth ? <div onClick={logout} className={styles.login}>{login}</div> : <NavLink to='/login'> <div className={styles.login}>login</div> </NavLink>}
 
 	</header>
 }
