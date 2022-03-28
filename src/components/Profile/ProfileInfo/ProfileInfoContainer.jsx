@@ -15,22 +15,21 @@ const withRouter = (WrappedComponent) => (props) => {
 };
 
 class ProfileInfoContainer extends React.Component {
-
 	componentDidMount() {
 		let userId = this.props.params.userId;
 		if (!userId) {
 			userId = this.props.authUserId;
 		}
+
 		this.props.getUsersProfile(userId)
 		this.props.getStatus(userId);
 	}
-
 	render() {
 		return (
 			<ProfileInfo profile={this.props.profile} isAuth={this.props.isAuth} status={this.props.status} updateStatus={this.props.updateStatus} />
 		);
 	}
-}
+};
 const mapStateToProps = (state) => {
 	return {
 		profile: state.profilePage.profile,
@@ -43,7 +42,7 @@ export default compose(
 	connect(mapStateToProps, { getUsersProfile, getStatus, updateStatus }),
 	withRouter,
 	withAuthRedirect
-)(ProfileInfoContainer)
+)(ProfileInfoContainer);
 
 
 

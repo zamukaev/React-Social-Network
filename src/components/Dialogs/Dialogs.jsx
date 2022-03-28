@@ -1,17 +1,18 @@
 import React from "react";
-import styles from './Dialogs.module.css';
+
+import { reduxForm } from "redux-form";
 
 import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
-import { reduxForm } from "redux-form";
 import DialogsForm from "./DialogsForm";
+import Message from "./Message/Message";
+
+import styles from './Dialogs.module.css';
 
 
 
-const Dialogs = ({ state, sendMessageCreator, updateNewMessageTextCreator }) => {
 
+const Dialogs = ({ state, sendMessageCreator }) => {
 	const AddMessageFormRedux = reduxForm({ form: 'newMessageText' })(DialogsForm);
-
 	const addMessageHandle = (NewMessageData) => {
 		sendMessageCreator(NewMessageData.newMessageText);
 	};

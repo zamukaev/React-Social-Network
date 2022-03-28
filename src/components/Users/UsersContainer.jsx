@@ -1,19 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-
-import Users from "./Users";
-import { follow, unFollow, toggleIsFollowingProgress, getUsers } from "../../redux/usersReducer";
 import { compose } from "redux";
+
+import { follow, unFollow, toggleIsFollowingProgress, getUsers } from "../../redux/usersReducer";
 import withAuthRedirect from "../hoc/withAuthRedirect";
 
-class UserComponent extends React.Component {
+import Users from "./Users";
 
+class UserComponent extends React.Component {
 	componentDidMount() {
-		this.props.getUsers(this.props.pages, this.props.count)
+		const { pages, count } = this.props;
+		this.props.getUsers(pages, count);
 	}
 
 	onClickHandler = (pageNumber) => {
-		this.props.getUsers(pageNumber, this.props.count)
+		const { count } = this.props;
+		this.props.getUsers(pageNumber, count)
 	}
 
 	render() {
@@ -25,6 +27,7 @@ class UserComponent extends React.Component {
 			count={this.props.count}
 			pages={this.props.pages}
 			users={this.props.users}
+			portionSize={this.props.portionSize}
 			isFetching={this.props.isFetching}
 			followingInProgress={this.props.followingInProgress}
 			toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
@@ -33,20 +36,18 @@ class UserComponent extends React.Component {
 
 }
 
-
-
 const mapStateToProps = (state) => {
 	return {
 		users: state.usersPage.users,
 		pages: state.usersPage.pages,
 		count: state.usersPage.count,
+		portionSize: state.usersPage.portionSize,
 		totalCount: state.usersPage.totalCount,
 		isFetching: state.usersPage.isFetching,
 		followingInProgress: state.usersPage.followingInProgress
 	}
 };
-
 export default compose(
 	connect(mapStateToProps, { follow, unFollow, toggleIsFollowingProgress, getUsers }),
 	withAuthRedirect
-)(UserComponent)
+)(UserComponent);

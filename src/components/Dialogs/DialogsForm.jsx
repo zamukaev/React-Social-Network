@@ -1,9 +1,12 @@
 import React from "react";
 import { Field } from 'redux-form';
-import { Element } from '../comon/FormsControls/FormsControls';
+
+import { Element } from '../common/FormsControls/FormsControls';
 import { required, maxLengthCreator } from '../../utils/validators';
+
 const Textarea = Element('textarea');
 const maxLength100 = maxLengthCreator(100, 5);
+
 const DialogsForm = (props) => {
 	return (
 		<form onSubmit={props.handleSubmit}>
@@ -11,5 +14,5 @@ const DialogsForm = (props) => {
 			<div><button>send message</button></div>
 		</form>
 	)
-}
+};
 export default DialogsForm;

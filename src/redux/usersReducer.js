@@ -12,6 +12,7 @@ const initialState = {
 	pages: 1,
 	count: 5,
 	totalCount: 0,
+	portionSize: 10,
 	isFetching: true,
 	followingInProgress: []
 
@@ -76,36 +77,30 @@ export const toggleIsFollowingProgress = (isFetching, userId) => ({ type: TOGGLE
 
 //###############Thunk#######################
 export const getUsers = (pages, count) => {
-	return (dispatch) => {
+	return async (dispatch) => {
 		dispatch(setToggleIsFetching(true));
-		usersAPI.getUsers(pages, count)
-			.then(response => {
-				dispatch(setUsers(response.data.items));
-				dispatch(setTotalCountAC(response.data.totalCount));
-				dispatch(setToggleIsFetching(false));
-				dispatch(setPagesAC(pages))
-			});
+		const response = await usersAPI.getUsers(pages, count)
+		dispatch(setUsers(response.data.items));
+		dispatch(setTotalCountAC(response.data.totalCount));
+		dispatch(setToggleIsFetching(false));
+		dispatch(setPagesAC(pages))
 	}
 }
 
 export const follow = (id) => {
-	return (dispatch) => {
+	return async (dispatch) => {
 		dispatch(toggleIsFollowingProgress(true, id));
-		usersAPI.follow(id)
-			.then(response => {
-				if (response.data.resultCode == 0) dispatch(followSuccess(id));
-				dispatch(toggleIsFollowingProgress(false, id));
-			});
+		const response = await usersAPI.follow(id)
+		if (response.data.resultCode == 0) dispatch(followSuccess(id));
+		dispatch(toggleIsFollowingProgress(false, id));
 	}
 }
 export const unFollow = (id) => {
-	return (dispatch) => {
+	return async (dispatch) => {
 		dispatch(toggleIsFollowingProgress(true, id));
-		usersAPI.unFollow(id)
-			.then(response => {
-				if (response.data.resultCode == 0) dispatch(unFollowSuccess(id));
-				dispatch(toggleIsFollowingProgress(false, id));
-			});
+		const response = await usersAPI.unFollow(id)
+		if (response.data.resultCode == 0) dispatch(unFollowSuccess(id));
+		dispatch(toggleIsFollowingProgress(false, id));
 	}
 }
 export default usersReducer;

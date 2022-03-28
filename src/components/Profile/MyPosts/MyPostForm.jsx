@@ -1,10 +1,12 @@
 import React from "react";
 import { Field } from "redux-form";
-import { Element } from "../../comon/FormsControls/FormsControls";
+import { Element } from "../../common/FormsControls/FormsControls";
 import { required } from "../../../utils/validators";
 import { maxLengthCreator } from "../../../utils/validators";
+
 const maxLength100 = maxLengthCreator(100, 5);
 const Textarea = Element('textarea');
+
 const MyPostForm = (props) => {
 	return (
 		<form onSubmit={props.handleSubmit}>
