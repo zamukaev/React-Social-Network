@@ -1,10 +1,12 @@
 import React from "react";
-import ProfileInfo from './ProfileInfo';
-import withAuthRedirect from '../../hoc/withAuthRedirect';
-import { getUsersProfile, getStatus, updateStatus } from "../../../redux/profileReducer";
 import { connect } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { compose } from "redux";
+
+import { getUsersProfile, getStatus, updateStatus, savePhotoThunk, saveProfile } from "../../../redux/profileReducer";
+import withAuthRedirect from '../../hoc/withAuthRedirect';
+
+import ProfileInfo from './ProfileInfo';
 
 const withRouter = (WrappedComponent) => (props) => {
 	const params = useParams();
@@ -15,18 +17,36 @@ const withRouter = (WrappedComponent) => (props) => {
 };
 
 class ProfileInfoContainer extends React.Component {
-	componentDidMount() {
+	refreshProfile() {
 		let userId = this.props.params.userId;
 		if (!userId) {
 			userId = this.props.authUserId;
 		}
-
-		this.props.getUsersProfile(userId)
+		this.props.getUsersProfile(userId);
 		this.props.getStatus(userId);
 	}
+
+	componentDidMount() {
+		this.refreshProfile();
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		if (this.props.params.userId !== prevProps.params.userId) {
+			this.refreshProfile();
+		}
+	}
+
 	render() {
 		return (
-			<ProfileInfo profile={this.props.profile} isAuth={this.props.isAuth} status={this.props.status} updateStatus={this.props.updateStatus} />
+			<ProfileInfo
+				isOwner={!this.props.params.userId}
+				profile={this.props.profile}
+				isAuth={this.props.isAuth}
+				status={this.props.status}
+				updateStatus={this.props.updateStatus}
+				savePhotoThunk={this.props.savePhotoThunk}
+				saveProfile={this.props.saveProfile}
+			/>
 		);
 	}
 };
@@ -39,7 +59,7 @@ const mapStateToProps = (state) => {
 	}
 };
 export default compose(
-	connect(mapStateToProps, { getUsersProfile, getStatus, updateStatus }),
+	connect(mapStateToProps, { getUsersProfile, getStatus, updateStatus, savePhotoThunk, saveProfile }),
 	withRouter,
 	withAuthRedirect
 )(ProfileInfoContainer);

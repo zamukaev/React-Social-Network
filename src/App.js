@@ -18,7 +18,6 @@ const UsersContainer = React.lazy(() => import('./components/Users/UsersContaine
 const LoginContainer = React.lazy(() => import('./components/Login/LoginContainer'));
 const Profile = React.lazy(() => import('./components/Profile/Profile'));
 
-
 class App extends React.Component {
 	componentDidMount() {
 		this.props.initialize()
@@ -29,10 +28,8 @@ class App extends React.Component {
 			return <Preload />
 		}
 
-
 		return (
 			<div className='app'>
-
 				<div className='app-wrapper'>
 					<HeaderContainer />
 					<Navbar />
@@ -50,10 +47,8 @@ class App extends React.Component {
 								<Route path="/login" element={<LoginContainer />} />
 							</Routes>
 						</React.Suspense>
-
 					</div>
 				</div>
-
 			</div>
 		);
 	}
