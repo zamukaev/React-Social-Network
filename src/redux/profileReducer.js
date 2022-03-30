@@ -1,8 +1,10 @@
 import { profileAPI, } from '../api/api'
+import { stopSubmit } from 'redux-form';
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const SAVE_PHOTO = 'SAVE_PHOTO';
+const UPDATE_PROFILE_STATUS = 'UPDATE_PROFILE_STATUS';
 const initialState = {
 	posts: [
 		{
@@ -18,7 +20,8 @@ const initialState = {
 	],
 	newPostText: '',
 	profile: null,
-	status: ''
+	status: '',
+	updateProfileStatus: true
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -45,10 +48,15 @@ const profileReducer = (state = initialState, action) => {
 				status: action.status
 			};
 		case SAVE_PHOTO:
-
 			return {
 				...state,
 				profile: { ...state.profile, photos: action.photos }
+			};
+		case UPDATE_PROFILE_STATUS:
+			console.log(action.updateProfileStatus)
+			return {
+				...state,
+				updateProfileStatus: action.updateProfileStatus
 			};
 		default: return state;
 	}
@@ -58,6 +66,7 @@ export const addPostActionCreator = (newPostText) => ({ type: ADD_POST, newPostT
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 export const savePhotoCreator = (photos) => ({ type: SAVE_PHOTO, photos })
+export const updateProfileStatusAC = (updateProfileStatus) => ({ type: UPDATE_PROFILE_STATUS, updateProfileStatus })
 //###############Thunk#######################
 export const getUsersProfile = (userId) => async (dispatch) => {
 	const response = await profileAPI.getUserProfile(userId)
@@ -83,7 +92,13 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
 	const userId = getState().auth.id;
 	const response = await profileAPI.saveProfile(profile);
 	if (response.data.resultCode == 0) {
+		dispatch(updateProfileStatusAC(true))
 		dispatch(getUsersProfile(userId))
+
+	} else {
+		dispatch(updateProfileStatusAC(false))
+		let message = response.data.messages.length > 0 ? response.data.messages[0] : 'some error';
+		dispatch(stopSubmit('profile', { _error: message }));
 	}
 }
 

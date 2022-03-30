@@ -46,4 +46,4 @@ export const logout = () => async (dispatch) => {
 	let response = await authAPI.logout()
 	dispatch(setAuthUserData(null, null, null, false));
 };
-export default authReducer;
+export default authReducer; 

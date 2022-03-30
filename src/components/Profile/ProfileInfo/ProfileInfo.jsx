@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import ProfileData from './ProfileData/ProfileData';
 import ProfileFormRedux from "./ProfileFromData/ProfileFormData";
+import { updateProfileStatusAC } from '../../../redux/profileReducer'
 
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import Preload from "../../common/Preload";
@@ -9,8 +10,7 @@ import Preload from "../../common/Preload";
 import styles from './ProfileInfo.module.css';
 import userImage from '../../../image/01.png';
 
-const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhotoThunk, saveProfile }) => {
-	const [editMode, setEditMode] = useState(true);
+const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhotoThunk, saveProfile, updateProfileStatus, updateProfileStatusAC }) => {
 	const onChangeInputHandler = (event) => {
 		let saveMainPhoto = event.target.files[0]
 		savePhotoThunk(saveMainPhoto);
@@ -20,7 +20,6 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhotoThunk, s
 		return <Preload />
 	}
 	const onChangeHandler = (profileData) => {
-		setEditMode(true)
 		saveProfile(profileData)
 	}
 
@@ -31,17 +30,17 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhotoThunk, s
 				{isOwner && <input type="file" onChange={onChangeInputHandler} />}
 			</div>
 			<ProfileStatus status={status} updateStatus={updateStatus} />
-			{editMode && <ProfileData isOwner={isOwner} setEditMode={setEditMode} profile={profile} />}
-			{!editMode && <ProfileFormRedux initialValues={profile} onSubmit={onChangeHandler} profile={profile} />}
+			{updateProfileStatus && <ProfileData isOwner={isOwner} updateProfileStatusAC={updateProfileStatusAC} profile={profile} saveProfile={saveProfile} />}
+			{(!updateProfileStatus) && < ProfileFormRedux initialValues={profile} onSubmit={onChangeHandler} profile={profile} />}
 		</div >
 	);
 };
 
 export const Contacts = ({ contactsTitle, contactsValue }) => {
+
 	return (
 		<div>
-			<div><b>{contactsTitle}: </b>{contactsValue}</div>
-
+			<div><b>{contactsTitle}: </b><a href={contactsValue}>{contactsValue}</a></div>
 		</div>
 	)
 }
