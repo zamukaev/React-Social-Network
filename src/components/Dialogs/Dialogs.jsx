@@ -8,9 +8,6 @@ import Message from "./Message/Message";
 
 import styles from './Dialogs.module.css';
 
-
-
-
 const Dialogs = ({ state, sendMessageCreator }) => {
 	const AddMessageFormRedux = reduxForm({ form: 'newMessageText' })(DialogsForm);
 	const addMessageHandle = (NewMessageData) => {
@@ -31,6 +28,7 @@ const Dialogs = ({ state, sendMessageCreator }) => {
 				{dialogsElement}
 			</div>
 			<div className={styles.messages}>
+
 				<div className={styles.item}>
 					{messageElement}
 				</div>
@@ -40,5 +38,5 @@ const Dialogs = ({ state, sendMessageCreator }) => {
 			</div>
 		</div>
 	)
-}
+};
 export default Dialogs;

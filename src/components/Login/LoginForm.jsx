@@ -7,7 +7,7 @@ const maxLength30 = maxLengthCreator(30, 2);
 const passwordMaxLength10 = maxLengthCreator(10, 2);
 const Input = Element('input');
 
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm = ({ handleSubmit, error, captcha }) => {
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -21,6 +21,14 @@ const LoginForm = ({ handleSubmit, error }) => {
 			<div>
 				<Field component={Input} name={'rememberMe'} type={'checkbox'} /> remember me
 			</div>
+			{
+				captcha &&
+				<div>
+					<img src={captcha} alt="captcha" />
+					<Field component={Input} name={'captcha'} /> remember me
+				</div>
+			}
+
 			<div>
 				<button  >Login</button>
 			</div>

@@ -40,7 +40,7 @@ export const Contacts = ({ contactsTitle, contactsValue }) => {
 
 	return (
 		<div>
-			<div><b>{contactsTitle}: </b><a href={contactsValue}>{contactsValue}</a></div>
+			<div><b>{contactsTitle}: </b><a href={contactsValue} target="_blank">{contactsValue}</a></div>
 		</div>
 	)
 }

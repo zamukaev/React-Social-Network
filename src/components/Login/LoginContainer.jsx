@@ -7,25 +7,26 @@ import { LoginReduxForm } from './LoginForm';
 import { login } from '../../redux/authReducer'
 
 
-const LoginContainer = (props) => {
+const LoginContainer = ({ login, isAuth, captcha }) => {
 	const onSubmit = (formData) => {
-		props.login(formData.email, formData.password, formData.rememberMe);
+		login(formData.email, formData.password, formData.rememberMe, formData.captcha);
 	};
 
-	if (props.isAuth) {
+	if (isAuth) {
 		return <Navigate to="/profile" />
 	}
 
 	return (
 		<div>
 			<h1>Login</h1>
-			<LoginReduxForm onSubmit={onSubmit} />
+			<LoginReduxForm onSubmit={onSubmit} captcha={captcha} />
 		</div>
 	)
 };
 const mapStateToProps = (state) => {
 	return {
-		isAuth: state.auth.isAuth
+		isAuth: state.auth.isAuth,
+		captcha: state.auth.captcha
 	}
 };
 export default compose(

@@ -17,9 +17,9 @@ const mapStateToProps = (state) => {
 		login: state.auth.login,
 		email: state.auth.email,
 		isAuth: state.auth.isAuth,
-
 	}
 };
+
 export default compose(
 	connect(mapStateToProps, { logout })
 )(HeaderContainer);

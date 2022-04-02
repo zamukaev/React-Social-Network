@@ -17,7 +17,7 @@ const MyPosts = ({ posts, addPostActionCreator, }) => {
 			<h3>My posts</h3>
 			<MyPostReduxForm onSubmit={onSubmit} />
 			<div className={styles.posts}>
-				{posts.map((item, index) => <Post key={index.toString()} post={item.post} likesCount={item.likesCount} />)}
+				{posts.map((item, index) => <Post key={index.toString()} post={item.post} likesCount={item.likesCount} />).reverse()}
 			</div>
 		</div >
 	)
