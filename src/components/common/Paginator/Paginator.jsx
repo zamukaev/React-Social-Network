@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from './Paginator.module.css';
 import cn from 'classnames'
-import Preload from "../Preload";
+import Preload from "../Preload/Preload";
 
 const Paginator = ({ totalCount, count, portionSize, onClickHandler, pages, isFetching }) => {
 	let pagesCount = Math.ceil(totalCount / count);

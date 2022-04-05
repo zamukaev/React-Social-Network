@@ -1,0 +1,21 @@
+.errorField {
+	opacity: 0;
+	visibility: hidden;
+	position:absolute;
+	top: 50%;
+	right: 50%;
+	text-align: center;
+	padding: 20px;
+	color: red;
+	font-size: 26px;
+	background: white;
+	border: 2px solid black;
+	max-width: 400px;
+	list-style:none;
+
+}
+.errorField.visible{
+	transition: all 0.3s ease;
+	opacity: 1;
+	visibility: visible;
+}

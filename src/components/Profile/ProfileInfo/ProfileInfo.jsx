@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
 import ProfileData from './ProfileData/ProfileData';
 import ProfileFormRedux from "./ProfileFromData/ProfileFormData";
-import { updateProfileStatusAC } from '../../../redux/profileReducer'
 
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
-import Preload from "../../common/Preload";
+import Preload from "../../common/Preload/Preload";
 
 import styles from './ProfileInfo.module.css';
 import userImage from '../../../image/01.png';
+import ErrorField from "../../common/ErrorField/ErrorField";
 
-const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhotoThunk, saveProfile, updateProfileStatus, updateProfileStatusAC }) => {
+const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhotoThunk, saveProfile, updateProfileStatus, updateProfileStatusAC, error }) => {
 	const onChangeInputHandler = (event) => {
 		let saveMainPhoto = event.target.files[0]
 		savePhotoThunk(saveMainPhoto);
@@ -25,6 +25,7 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhotoThunk, s
 
 	return (
 		<div >
+			{error && <ErrorField error={error} />}
 			<div className={styles.profileImage}>
 				<img src={profile.photos.large ? profile.photos.large : userImage} alt="" />
 				{isOwner && <input type="file" onChange={onChangeInputHandler} />}

@@ -1,13 +1,14 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { initialize } from './redux/appReducer'
-import Preload from './components/common/Preload';
+import Preload from './components/common/Preload/Preload';
 import './App.css';
 
 import HeaderContainer from './components/Header/HeaderContainer'
+import Error_404 from './components/Error_404/Error_404';
 import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Music from './components/Music/Music';
@@ -36,15 +37,16 @@ class App extends React.Component {
 					<div className='app-wrapper-content'>
 						<React.Suspense fallback={<Preload />}>
 							<Routes>
-								<Route path="/profile/:userId/*" element={<Profile />} />
 								<Route path="/profile" element={<Profile />} />
-								<Route path="/" element={<Profile />} />
+								<Route path="/profile/:userId/*" element={<Profile />} />
+								<Route path="/" element={<Navigate to={"/profile"} />} />
 								<Route path="/message/*" element={<DialogsContainer />} />
 								<Route path="/news" element={<News />} />
 								<Route path="/music" element={<Music />} />
 								<Route path="/settings" element={<Settings />} />
 								<Route path="/users" element={<UsersContainer />} />
 								<Route path="/login" element={<LoginContainer />} />
+								<Route path="*" element={<Error_404 />} />
 							</Routes>
 						</React.Suspense>
 					</div>
