@@ -1,9 +1,10 @@
 import React from "react";
+
 import Paginator from "../common/Paginator/Paginator";
+
 import User from "./User";
 
 const Users = ({ follow, portionSize, unFollow, onClickHandler, totalCount, count, pages, users, isFetching, followingInProgress }) => {
-
 	const btnFollowHandler = (id) => {
 		follow(id);
 
@@ -34,6 +35,6 @@ const Users = ({ follow, portionSize, unFollow, onClickHandler, totalCount, coun
 			}
 		</div >
 	)
-}
+};
 
 export default Users;

@@ -12,10 +12,15 @@
 	border: 2px solid black;
 	max-width: 400px;
 	list-style:none;
+	.visible {
+		transition: all 0.3s ease;
+		opacity: 1;
+		visibility: visible;
+	}
 
 }
-.errorField.visible{
-	transition: all 0.3s ease;
-	opacity: 1;
-	visibility: visible;
-}
+// .errorField.visible {
+// 	transition: all 0.3s ease;
+// 	opacity: 1;
+// 	visibility: visible;
+// }

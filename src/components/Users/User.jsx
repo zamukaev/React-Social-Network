@@ -1,20 +1,25 @@
 import React from "react";
+import styles from './Users.module.scss';
+
 import { NavLink } from "react-router-dom";
 
-import styles from './Users.module.css';
 import userImage from '../../image/01.png';
 
 
 const User = ({ user, btnUnFollowHandler, btnFollowHandler, followingInProgress }) => {
 	return (
-		<div key={user.id}>
+		<div className={styles.users} key={user.id}>
 			<NavLink to={`/profile/${user.id}`} >
-				<img className={styles.usersImage} src={user.photos.small !== null ? user.photos.small : userImage} alt="" />
-				<h3>{user.name}</h3>
+				<div className={styles.usersImage}>
+					<img src={user.photos.small !== null ? user.photos.small : userImage} alt="" />
+				</div>
+				<div className={styles.name}>
+					{user.name}
+				</div>
 			</NavLink>
-			<p>{'item.location.city'}</p>
-			<p>{'item.location.country'}</p>
-			<div>
+			<div className={styles.city}>{'item.location.city'}</div>
+			<div className={styles.country}>{'item.location.country'}</div>
+			<div className={styles.btn}>
 				{
 					user.followed ?
 						<button onClick={() => btnUnFollowHandler(user.id)} disabled={followingInProgress.some(id => id === user.id)} >unfollow</button>
@@ -23,6 +28,6 @@ const User = ({ user, btnUnFollowHandler, btnFollowHandler, followingInProgress 
 			</div>
 		</div>
 	)
-}
+};
 
 export default User;

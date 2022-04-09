@@ -1,0 +1,33 @@
+.formContainer{
+	max-width: 600px;
+	margin: 0px auto;
+	padding: 20px;
+	background: #FFFFFF;
+	.title{
+		font-size: 12px;
+		line-height: 11px;
+		text-transform: uppercase;
+		font-weight: 500;
+		margin-bottom: 10px;
+	}
+	.formItem input{
+		outline: none;
+		padding: 10px;
+		width: 100%;
+		margin-bottom: 10px;
+		box-shadow: 0px 0px 2px 3px #0E6795 ;
+	}
+	.btn{
+		padding: 10px;
+		border-radius: 10px;
+		color:#FFFFFF;
+		background: #0E6795;
+	}
+	.check{
+		font-size: 16px;
+		display: flex;
+		justify-content: space-between;
+		margin: 10px 0px;
+	}
+	
+}

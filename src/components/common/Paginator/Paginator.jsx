@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import styles from './Paginator.module.css';
-import cn from 'classnames'
+import styles from './Paginator.module.scss';
+
+import cn from 'classnames';
 import Preload from "../Preload/Preload";
 
 const Paginator = ({ totalCount, count, portionSize, onClickHandler, pages, isFetching }) => {
@@ -22,7 +23,7 @@ const Paginator = ({ totalCount, count, portionSize, onClickHandler, pages, isFe
 	return (
 		<div className={styles.pagination}>
 			{portionNumber > 1 &&
-				<button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>}
+				<button className={styles.prev} onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>}
 			{
 				page
 					.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -30,10 +31,10 @@ const Paginator = ({ totalCount, count, portionSize, onClickHandler, pages, isFe
 			}
 			{
 				portionCount > portionNumber &&
-				<button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button>
+				<button className={styles.next} onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button>
 			}
 		</div >
 	)
-}
+};
 
 export default Paginator;

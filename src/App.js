@@ -1,18 +1,15 @@
 import React from 'react';
+import './App.scss';
+
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { initialize } from './redux/appReducer'
 import Preload from './components/common/Preload/Preload';
-import './App.css';
 
 import HeaderContainer from './components/Header/HeaderContainer'
 import Error_404 from './components/Error_404/Error_404';
-import Navbar from './components/Navbar/Navbar';
-import News from './components/News/News';
-import Music from './components/Music/Music';
-import Settings from './components/Settings/Settings';
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
@@ -30,27 +27,25 @@ class App extends React.Component {
 		}
 
 		return (
-			<div className='app'>
-				<div className='app-wrapper'>
-					<HeaderContainer />
-					<Navbar />
-					<div className='app-wrapper-content'>
+			<div className='wrapper'>
+				<HeaderContainer />
+				<main className='page'>
+					<div className='_container'>
 						<React.Suspense fallback={<Preload />}>
-							<Routes>
-								<Route path="/profile" element={<Profile />} />
-								<Route path="/profile/:userId/*" element={<Profile />} />
-								<Route path="/" element={<Navigate to={"/profile"} />} />
-								<Route path="/message/*" element={<DialogsContainer />} />
-								<Route path="/news" element={<News />} />
-								<Route path="/music" element={<Music />} />
-								<Route path="/settings" element={<Settings />} />
-								<Route path="/users" element={<UsersContainer />} />
-								<Route path="/login" element={<LoginContainer />} />
-								<Route path="*" element={<Error_404 />} />
-							</Routes>
+							<div className="content">
+								<Routes>
+									<Route path="/profile" element={<Profile />} />
+									<Route path="/profile/:userId/*" element={<Profile />} />
+									<Route path="/" element={<Navigate to={"/profile"} />} />
+									<Route path="/message/*" element={<DialogsContainer />} />
+									<Route path="/users" element={<UsersContainer />} />
+									<Route path="/login" element={<LoginContainer />} />
+									<Route path="*" element={<Error_404 />} />
+								</Routes>
+							</div>
 						</React.Suspense>
 					</div>
-				</div>
+				</main>
 			</div>
 		);
 	}

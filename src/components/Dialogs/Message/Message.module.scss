@@ -1,0 +1,14 @@
+.message{
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	margin: 10px;
+	background: #FFFFFF;
+	.img{
+		margin-right: 10px;
+	}
+	.text{
+		flex: 1 0 100%;
+	}
+	
+}

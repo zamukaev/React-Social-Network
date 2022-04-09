@@ -1,0 +1,25 @@
+.posts {
+	background: #FFFFFF;
+	border-radius: 4px;
+	padding: 30px;
+	margin-bottom: 20px;
+	box-shadow: 0px 2px 3px 2px #FFFFFF ;
+	:last-child{
+		margin-bottom: 0px;
+	}
+	.author {
+		display: flex;
+		align-items: center;
+		margin-bottom: 15px;
+
+		.authorImg {
+			margin-right: 15px;
+		}
+
+	}
+
+	.PostText {
+		font-size: 16px;
+		line-height: 150%;
+	}
+}

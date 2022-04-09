@@ -1,16 +1,27 @@
 import React from "react";
-import styles from './Post.module.css'
+import styles from './Post.module.scss'
 
-const Post = (props) => {
+import Preload from "../../../common/Preload/Preload";
+
+const Post = ({ post, profile, likesCount }) => {
+	if (!profile) {
+		return <Preload />
+	}
 	return (
-		<div className={styles.item} >
-			<img src="https://cdn2.iconfinder.com/data/icons/avatars-vol-1-glyph/64/glyph-avatar-man-trucker-farmer-ballcap-beard-overalls-128.png" alt="" />
-			{props.post}
+		<div className={styles.posts} >
+			<div className={styles.author}>
+				<div className={styles.authorImg}>
+					<img src={profile.photos.small ? profile.photos.small : ""} alt="" />
+				</div>
+				<div className={styles.PostText}>
+					{post}
+				</div>
+			</div>
 			<div>
-				<span>like</span> {props.likesCount}
+				<span>like</span> {likesCount}
 			</div>
 		</div>
 	);
-}
+};
 
 export default Post;

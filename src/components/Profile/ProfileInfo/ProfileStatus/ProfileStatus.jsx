@@ -1,6 +1,7 @@
-import React from "react";
-class ProfileStatus extends React.Component {
+import React from 'react';
+import styles from '../../Profile.module.scss';
 
+class ProfileStatus extends React.Component {
 	state = {
 		editMode: false,
 		status: this.props.status
@@ -36,16 +37,15 @@ class ProfileStatus extends React.Component {
 
 	render() {
 		return (
-
-			<div>
+			<div className={styles.profileStatus}>
 				{!this.state.editMode &&
-					<div>
+					<div className={styles.status} >
 						<b>Status:</b> <span onDoubleClick={this.activateEditMode}>{this.props.status || '----'}</span>
 					</div>
 				}
 				{
 					this.state.editMode &&
-					<div>
+					<div className={styles.statusInput} >
 						<input onChange={this.onChangeHandler} autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.status} />
 					</div>
 				}
@@ -55,3 +55,4 @@ class ProfileStatus extends React.Component {
 }
 
 export default ProfileStatus;
+

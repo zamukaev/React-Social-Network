@@ -1,0 +1,24 @@
+.wrapper {
+	min-height: 100%;
+	overflow: hidden;
+	background: #E5E5E5;
+	color: #181818;
+
+}
+// /* -------------- */
+
+.page{
+	margin-top: 100px;
+	._container {
+		// display: flex;
+		// flex-direction: row-reverse;
+		// justify-content: center;
+		max-width: 1400px;
+		margin: 42px auto;
+		.content{
+			// flex: 1 0 100%;
+			}
+	}
+
+}
+

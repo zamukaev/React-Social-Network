@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './Dialogs.module.scss';
 
 import { reduxForm } from "redux-form";
 
@@ -6,7 +7,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import DialogsForm from "./DialogsForm";
 import Message from "./Message/Message";
 
-import styles from './Dialogs.module.css';
+
 
 const Dialogs = ({ state, sendMessageCreator }) => {
 	const AddMessageFormRedux = reduxForm({ form: 'newMessageText' })(DialogsForm);
@@ -25,17 +26,16 @@ const Dialogs = ({ state, sendMessageCreator }) => {
 	return (
 		<div className={styles.gialogs}>
 			<div className={styles.dialogItems}>
-				{dialogsElement}
-			</div>
-			<div className={styles.messages}>
-
 				<div className={styles.item}>
+					{dialogsElement}
+				</div>
+				<div className={styles.messages}>
 					{messageElement}
 				</div>
-				<div className={styles.textarea}>
-					<AddMessageFormRedux onSubmit={addMessageHandle} />
-				</div >
 			</div>
+			<div className={styles.textarea}>
+				<AddMessageFormRedux onSubmit={addMessageHandle} />
+			</div >
 		</div>
 	)
 };

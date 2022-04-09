@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './Message.module.css';
+import styles from './Message.module.scss';
 const Message2 = ({ state }) => {
 
 	return (
@@ -13,6 +13,6 @@ const Message2 = ({ state }) => {
 			))}
 		</div>
 	);
-}
+};
 
 export default Message2;
